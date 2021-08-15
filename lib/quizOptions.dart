@@ -12,9 +12,9 @@ class QuizOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Question(_qA[_questionNum]["QuestionText"]),
+        Question(_qA[_questionNum]["questionText"]),
         Spacer(),
-        ...(_qA[_questionNum]["Answers"].map((answer) {
+        ...(_qA[_questionNum]["answers"].map((answer) {
           return Button(() => answerSelect(answer["score"]), answer["text"]);
         })),
       ],

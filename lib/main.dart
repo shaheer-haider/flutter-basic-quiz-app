@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _questions = const [
+  final _qA = const [
     {
       'questionText': 'What\'s your favorite color?',
       'answers': [
@@ -36,16 +36,24 @@ class _MyAppState extends State<MyApp> {
       ],
     },
     {
-      'questionText': 'Who\'s your favorite instructor?',
+      'questionText': 'What\'s your favorite place?',
       'answers': [
-        {'text': 'Max', 'score': 1},
-        {'text': 'Max', 'score': 1},
-        {'text': 'Max', 'score': 1},
-        {'text': 'Max', 'score': 1},
+        {'text': 'Karachi', 'score': 12},
+        {'text': 'Islamabad', 'score': 10},
+        {'text': 'Lahore', 'score': 5},
+        {'text': 'Quetta', 'score': 7},
+      ],
+    },
+    {
+      'questionText': 'What\'s your favorite fruit?',
+      'answers': [
+        {'text': 'Apple', 'score': 12},
+        {'text': 'Banana', 'score': 8},
+        {'text': 'Mango', 'score': 10},
+        {'text': 'Grapes', 'score': 3},
       ],
     },
   ];
-
   var _questionIndex = 0;
   var _totalScore = 0;
 
@@ -56,17 +64,13 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void _answerQuestion(int score) {
-    // var aBool = true;
-    // aBool = false;
-
+  void _answerSelect(int score) {
     _totalScore += score;
-
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
     print(_questionIndex);
-    if (_questionIndex < _questions.length) {
+    if (_questionIndex < _qA.length) {
       print('We have more questions!');
     } else {
       print('No more questions!');
@@ -86,13 +90,12 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('My First App'),
         ),
-        body: _questionIndex < _questions.length
-            ? QuizOptions(
-                _answerQuestion,
-                _questions,
-                _questionIndex,
-              )
-            : Result(_totalScore, _resetQuiz),
+        body: Container(
+          margin: EdgeInsets.only(bottom: 75),
+          child: _questionIndex < _qA.length
+              ? QuizOptions(_answerSelect, _qA, _questionIndex)
+              : Result(_totalScore, _resetQuiz),
+        ),
       ),
     );
   }
